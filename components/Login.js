@@ -1,23 +1,32 @@
 import { StyleSheet, Text,Alert, View, Image,TextInput, TouchableOpacity } from 'react-native';
 import React ,{useState}from 'react';
-import { authenticateUser } from '../Auth';
+import auth from '@react-native-firebase/auth';
 
 export default function Login({ navigation }) {
-  const [username,setUsername]=useState('');
+  const [email, setEmail] = useState('');
   const[password,setPassword]=useState('');
 
-  const  handleLogin=()=>{
-    if (authenticateUser(username,password)){
-      Alert.alert('Login Successful', 'Welcome', [
-        {
-          text: 'OK',
-          onPress: () => navigation.navigate('MovieList'),
-        },
-      ]);
-    } else {
-      Alert.alert('Login Failed', 'Invalid username or password');
-    }
-  }
+  const signIn = () => { 
+    auth()
+      .signInWithEmailAndPassword(email, password)  // Correct method name
+      .then(() => {
+        console.log('User account created & signed in!');
+        navigation.navigate('MovieList'); 
+      })
+      .catch(error => {
+        if (error.code === 'auth/email-already-in-use') {
+          console.log('That email address is already in use!');
+        }
+  
+        if (error.code === 'auth/invalid-email') {
+          console.log('That email address is invalid!');
+        }
+  
+        console.error(error);
+      });
+  };
+  
+  
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Login</Text>
@@ -28,9 +37,9 @@ export default function Login({ navigation }) {
 
       <TextInput 
         style={styles.input}
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
+        placeholder="email Id"
+        value={email}
+        onChangeText={setEmail}
       />
       <TextInput 
         style={styles.input}
@@ -41,7 +50,7 @@ export default function Login({ navigation }) {
         
       />
       <Text style={styles.forgotPassword}>Forgot Your Password?</Text>
-      <TouchableOpacity style={styles.Inbtn} onPress={handleLogin}>
+      <TouchableOpacity style={styles.Inbtn} onPress={signIn}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
       <Text style={styles.accountText}>Don't Have an Account?<TouchableOpacity onPress={() => navigation.navigate('Register')}>

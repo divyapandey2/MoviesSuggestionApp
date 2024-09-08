@@ -1,16 +1,16 @@
 
 import React from 'react'
 import { View,TouchableOpacity} from 'react-native';
-import Login from './components/LoginScreen/Login'
-import Signup from './components/SignupScreen/Register';
-import MovieList from './components/MovieListScreen/MovieList';
-import Favourite from './components/FavouriteScreen/Favourite';
+import Login from './components/Login'
+import Register from './components/SignupScreen/Register';
+import MovieList from './components/MovieList';
+import Favourite from './components/Favourite';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { FavProvider } from './components/customHooks/FavContext';
 import Profile from './components/ProfileScreen/Profile';
-import Register from './components/SignupScreen/Register';
+
 
 
 const Stack = createNativeStackNavigator();

@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View ,Button,FlatList,Image,TouchableOpacity} from 'react-native'
 import React,{useContext} from 'react'
-import { FavContext } from '../customHooks/FavContext'
+import { FavContext } from './customHooks/FavContext'
 
 
 export default function Favourite({navigation}) {

@@ -1,11 +1,11 @@
 import React,{useState,useContext}from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity,ActivityIndicator,Image,utton} from 'react-native';
-import useFetch from '../customHooks/useFetch';
-import { FavContext } from '../customHooks/FavContext';
+import { View, Text, FlatList, StyleSheet, TouchableOpacity,ActivityIndicator,Image} from 'react-native';
+import useFetch from './customHooks/useFetch';
+import { FavContext } from './customHooks/FavContext';
 
 const API_KEY = '88fee88334634a4b4e1340580d3c6b15';
 
-export default function MovieList() {
+export default function MovieList({navigation}) {
   const [language, setLanguage] = useState(null); 
   const {selectedMovies,isLoading} = useFetch(language,API_KEY);
   const { addFavorite} = useContext(FavContext);
