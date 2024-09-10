@@ -1,25 +1,24 @@
 import React,{useState,useContext}from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity,ActivityIndicator,Image} from 'react-native';
 import useFetch from './customHooks/useFetch';
-import { FavContext } from './customHooks/FavContext';
+
 
 const API_KEY = '88fee88334634a4b4e1340580d3c6b15';
 
 export default function MovieList({navigation}) {
   const [language, setLanguage] = useState(null); 
   const {selectedMovies,isLoading} = useFetch(language,API_KEY);
-  const { addFavorite} = useContext(FavContext);
+ // const { addFavorite} = useContext(FavContext);
 
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity style={styles.item} onPress={() => addFavorite(item)}>
+    <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('MovieDetails', { movie: item })}>
       <Text style={styles.title}>{item.title}</Text>
     <Image 
       source={{ uri: `https://image.tmdb.org/t/p/w500${item.poster_path}` }} 
       style={styles.image} 
     />
      <Text style={styles.year}>{new Date(item.release_date).getFullYear()}</Text>
-    <Text>{item.overview}</Text>
     
     </TouchableOpacity>
   );
@@ -82,8 +81,8 @@ const styles = StyleSheet.create({
     color: 'light grey ',
   },
   image: {
-   height:200,
-   width:150,
+   height:300,
+   width:'100%',
   },
   cards:{
     flexDirection:'row',

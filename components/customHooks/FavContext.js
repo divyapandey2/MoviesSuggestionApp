@@ -3,6 +3,7 @@ import React,{ createContext,useState,useContext } from "react";
 export const FavContext=createContext();
 
 export const FavProvider =({children})=>{
+  
    const [favorites,setFav]=useState([]);
 
 const addFavorite = (movie) => {
