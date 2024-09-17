@@ -11,6 +11,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { FavProvider } from './components/customHooks/FavContext';
 import Profile from './components/Profile';
 import Settings from './components/Settings';
+import Account from './components/Account';
+import HelpCenter from './components/HelpCenter';
 
 const Stack = createNativeStackNavigator();
 
@@ -50,7 +52,9 @@ const App = () => {
           <Stack.Screen name="MovieDetails" component={MovieDetails} />
           <Stack.Screen name="Favourite" component={Favourite} />
           <Stack.Screen name="Profile" component={Profile} />
+          <Stack.Screen name="Account" component={Account} />
           <Stack.Screen name="Settings" component={Settings} />
+          <Stack.Screen name="HelpCenter" component={HelpCenter} />
         </Stack.Navigator>
       </NavigationContainer>
     </FavProvider>
