@@ -6,7 +6,7 @@ export default function useFetch(language, apikey) {
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Fetch movies from API
+  
   const fetchMovies = async (page = 1) => {
     setIsLoading(true);
     try {
@@ -25,11 +25,11 @@ export default function useFetch(language, apikey) {
     }
   };
 
-  // Call fetchMovies when the language changes
+  
   useEffect(() => {
     if (language) {
-      setSelectedMovies([]); // Reset movies when language changes
-      fetchMovies(1); // Fetch first page
+      setSelectedMovies([]);
+      fetchMovies(1); 
     }
   }, [language]);
 

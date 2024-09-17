@@ -30,10 +30,7 @@ export default function Login({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Login</Text>
-      <Image 
-        source={{ uri: 'https://img.freepik.com/free-photo/adorable-cat-lifestyle_23-2151593339.jpg' }} 
-        style={styles.profilePicture} 
-      />
+      <Image source={require('./images/profileLogo.png')} style={styles.profilePicture} />
 
       <TextInput 
         style={styles.input}

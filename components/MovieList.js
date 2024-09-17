@@ -8,10 +8,10 @@ export default function MovieList({ navigation }) {
   const [language, setLanguage] = useState(null); 
   const { selectedMovies, isLoading, fetchMovies, currentPage, totalPages } = useFetch(language, API_KEY);
 
-  // Function to handle loading more movies when reaching 80% of the scroll
+  
   const handleLoadMore = () => {
     if (currentPage < totalPages && !isLoading) {
-      fetchMovies(currentPage + 1); // Fetch next page
+      fetchMovies(currentPage + 1); 
     }
   };
 
@@ -49,8 +49,8 @@ export default function MovieList({ navigation }) {
           data={selectedMovies}
           renderItem={renderItem}
           keyExtractor={(item) => item.id.toString()}
-          onEndReached={handleLoadMore} // Load more when 80% of list is reached
-          onEndReachedThreshold={0.8} // 80% scroll threshold
+          onEndReached={handleLoadMore} 
+          onEndReachedThreshold={0.8} 
           ListFooterComponent={isLoading && currentPage > 1 ? <ActivityIndicator size="large" color="#f0f" /> : null}
         />
       )}
