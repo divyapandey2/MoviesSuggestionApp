@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, ActivityIndicator, Image } from 'react-native';
 import useFetch from './customHooks/useFetch';
 
 const API_KEY = '88fee88334634a4b4e1340580d3c6b15';
 
 export default function MovieList({ navigation }) {
-  const [language, setLanguage] = useState(null); 
+  const [language, setLanguage] = useState('en'); 
   const { selectedMovies, isLoading, fetchMovies, currentPage, totalPages } = useFetch(language, API_KEY);
 
-  
   const handleLoadMore = () => {
     if (currentPage < totalPages && !isLoading) {
       fetchMovies(currentPage + 1); 

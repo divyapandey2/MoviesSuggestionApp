@@ -13,6 +13,7 @@ import Profile from './components/Profile';
 import Settings from './components/Settings';
 import Account from './components/Account';
 import HelpCenter from './components/HelpCenter';
+import SplashScreen from './components/SplashScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,7 +22,7 @@ const App = () => {
     <FavProvider>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Login"
+          initialRouteName="SplashScreen"
           screenOptions={{
             headerStyle: {
               backgroundColor: '#6200EE',
@@ -31,7 +32,8 @@ const App = () => {
               fontWeight: 'bold',
             },
           }}>
-          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }}/>
+          <Stack.Screen name="Login" component={Login} options={{ headerShown: false }}/>
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen
             name="MovieList"

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
 import React, { useContext } from 'react';
 import { FavContext } from './customHooks/FavContext';
 import { useRoute } from '@react-navigation/native';
@@ -12,23 +12,23 @@ export default function MovieDetails({  navigation }) {
     const handleAddFavorite = () => {
         addFavorite(movie);
     };
-
+console.log(movie.overview)
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <Text style={styles.title}>{movie.title}</Text>
             <Image 
                 source={{ uri: `https://image.tmdb.org/t/p/w500${movie.poster_path}` }} 
                 style={styles.image} 
             />
             <Text style={styles.year}>{new Date(movie.release_date).getFullYear()}</Text>
-            <Text>{movie.overview}</Text>
+            <Text style={{color: '#fff'}}>{movie.overview}</Text>
             <TouchableOpacity 
                 style={styles.button} 
                 onPress={handleAddFavorite}
             >
                 <Text style={styles.buttonText}>Add to Favorites</Text>
             </TouchableOpacity>
-        </View>
+        </ScrollView>
     );
 }
 
