@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, ActivityIndicator, Image } from 'react-native';
 import useFetch from './customHooks/useFetch';
-
-const API_KEY = '88fee88334634a4b4e1340580d3c6b15';
+import { API_KEY } from './Constants';
 
 export default function MovieList({ navigation }) {
   const [language, setLanguage] = useState('en'); 
@@ -15,34 +14,36 @@ export default function MovieList({ navigation }) {
   };
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('MovieDetails', { movie: item })}>
-      <Text style={styles.title}>{item.title}</Text>
-      <Image 
-        source={{ uri: `https://image.tmdb.org/t/p/w500${item.poster_path}` }} 
-        style={styles.image} 
-      />
-      <Text style={styles.year}>{new Date(item.release_date).getFullYear()}</Text>
+    <TouchableOpacity onPress={() => navigation.navigate('MovieDetails', { movie: item })}>
+      <View style={styles.item}>
+        <Text style={styles.title}>{item.title}</Text>
+        <Image 
+          source={{ uri: `https://image.tmdb.org/t/p/w500${item.poster_path}` }} 
+          style={styles.image} 
+        />
+        <Text style={styles.releaseYear}>{new Date(item.release_date).getFullYear()}</Text>
+      </View>
     </TouchableOpacity>
   );
 
   return (
     <View style={styles.container}>
       <View style={styles.cards}>
-        <TouchableOpacity style={styles.button} onPress={() => setLanguage('en')}>
+        <TouchableOpacity style={styles.languageButton} onPress={() => setLanguage('en')}>
           <Text style={styles.buttonText}>English</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button} onPress={() => setLanguage('ko')}>
+        <TouchableOpacity style={styles.languageButton} onPress={() => setLanguage('ko')}>
           <Text style={styles.buttonText}>Korean</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button} onPress={() => setLanguage('de')}>
+        <TouchableOpacity style={styles.languageButton} onPress={() => setLanguage('de')}>
           <Text style={styles.buttonText}>German</Text>
         </TouchableOpacity>
       </View>
 
       {isLoading && currentPage === 1 ? (
-        <ActivityIndicator size="large" color="#f0f" />
+        <ActivityIndicator size="large" color="#e74c3c" />
       ) : (
         <FlatList
           data={selectedMovies}
@@ -50,7 +51,7 @@ export default function MovieList({ navigation }) {
           keyExtractor={(item) => item.id.toString()}
           onEndReached={handleLoadMore} 
           onEndReachedThreshold={0.8} 
-          ListFooterComponent={isLoading && currentPage > 1 ? <ActivityIndicator size="large" color="#f0f" /> : null}
+          ListFooterComponent={isLoading && currentPage > 1 ? <ActivityIndicator size="large" color="#e74c3c" /> : null}
         />
       )}
     </View>
@@ -60,46 +61,63 @@ export default function MovieList({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: '#1e1e1e',
     padding: 10,
   },
   item: {
-    backgroundColor: 'grey',
-    padding: 10,
-    marginVertical: 8,
-    borderRadius: 10,
-    width: 300,
+    backgroundColor: '#333',
+    padding: 15,
+    marginVertical: 10,
+    borderRadius: 15,
     justifyContent: "center",
+    alignItems: 'center',
+    elevation: 5,
+    overflow: 'hidden',
   },
   title: {
-    fontSize: 18,
-    color: 'white',
-  },
-  year: {
-    fontSize: 16,
+    fontSize: 22,
     fontWeight: 'bold',
-    color: 'light grey',
+    color: '#fff',
+    marginBottom: 8,
+    textAlign: 'center',
+    letterSpacing: 1.2,
   },
   image: {
-    height: 300,
+    height: 250,
     width: '100%',
+    borderRadius: 10,
+    marginBottom: 8,
+    resizeMode: 'cover',
+  },
+  releaseYear: {
+    fontSize: 16,
+    color: '#ccc',
+    fontWeight: '500',
   },
   cards: {
     flexDirection: 'row',
-    marginVertical: 20,
-    paddingVertical: 20,
+    marginVertical: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 15,
   },
-  button: {
-    backgroundColor: 'white',
-    borderRadius: 10,
-    paddingHorizontal: 10,
-    marginHorizontal: 8,
+  languageButton: {
+    backgroundColor: '#2980b9',
+    borderRadius: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    marginHorizontal: 10,
     alignItems: 'center',
     justifyContent: "center",
-    height: 30,
+    shadowColor: '#2c3e50',
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    elevation: 4,
   },
   buttonText: {
-    color: 'black',
-    fontSize: 20,
+    color: 'white',
+    fontSize: 16,
+    fontWeight: '600',
   },
 });

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TextInput,View,TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, TextInput,View,TouchableOpacity, Alert } from 'react-native'
 import React,{useState} from 'react'
 import auth from '@react-native-firebase/auth';
 
@@ -19,15 +19,17 @@ export default function Register({navigation}) {
         navigation.navigate('Login'); 
       })
       .catch(error => {
-        if (error.code === 'auth/email-already-in-use') {
-          console.log('That email address is already in use!');
+
+        switch(error.code){
+          case 'auth/email-already-in-use' :
+            Alert.alert('That email address is already in use!');
+          case 'auth/invalid-email' :
+            Alert.alert('That email address is invalid!');
+          case 'auth/weak-password' :
+            Alert.alert('Invalid password.\nshould be at least 6 characters');
+          default :
+            console.log(error);
         }
-  
-        if (error.code === 'auth/invalid-email') {
-          console.log('That email address is invalid!');
-        }
-  
-        console.error(error);
       });
   };
     return (
@@ -78,8 +80,8 @@ export default function Register({navigation}) {
         onChangeText={setPassword}
       />
       <TouchableOpacity style={styles.Inbtn} onPress={createAccount}>
-  <Text style={styles.buttonText}>Submit</Text>
-</TouchableOpacity>
+        <Text style={styles.buttonText}>Submit</Text>
+      </TouchableOpacity>
 
       <Text style={styles.accountText}>
         Already have an account?
@@ -103,15 +105,15 @@ const styles = StyleSheet.create({
         
       },
       input: {
-        backgroundColor: 'grey',
+        backgroundColor: 'lightgrey',
         color: 'black',
         fontSize: 18,
         paddingHorizontal: 8,
         width: '100%',
-        height: 50,
+        height: "8%",
         borderRadius: 20,
-        //marginTop: 20,
-        marginBottom: 0, 
+        marginBottom: 1, 
+        padding: 4,
         marginVertical: 10,
       },
       Inbtn: {
