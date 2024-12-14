@@ -3,26 +3,40 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default function Profile({ navigation }) {
-  
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Movies  Suggestion</Text>
-      <TouchableOpacity onPress={() => navigation.navigate('Account')} style={styles.but}>
-      <Text style={styles.buttonText}><Icon name="account-circle" size={30} color="blue" backgroundColor="transparent" padding={5} />
-      Account</Text>
+      <Text style={styles.headerText}>Movies Suggestion</Text>
+
+      <TouchableOpacity onPress={() => navigation.navigate('Account')} style={styles.button}>
+        <View style={styles.buttonContent}>
+          <Icon name="account-circle" size={30} color="#007bff" />
+          <Text style={styles.buttonText}>Account</Text>
+        </View>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Favourite')} style={styles.but}>
-      <Text style={styles.buttonText}><Icon name="favorite-border" size={30} color="red" backgroundColor="transparent" padding={5} />
-        Favourites</Text>
+
+      <TouchableOpacity onPress={() => navigation.navigate('Favourite')} style={styles.button}>
+        <View style={styles.buttonContent}>
+          <Icon name="favorite-border" size={30} color="#e74c3c" />
+          <Text style={styles.buttonText}>Favourites</Text>
+        </View>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Settings')} style={styles.but}>
-        <Text style={styles.buttonText}><Icon name="settings" size={30} color="black" backgroundColor="transparent" padding={5} />Settings</Text>
+
+      <TouchableOpacity onPress={() => navigation.navigate('Settings')} style={styles.button}>
+        <View style={styles.buttonContent}>
+          <Icon name="settings" size={30} color="#2c3e50" />
+          <Text style={styles.buttonText}>Settings</Text>
+        </View>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('HelpCenter')} style={styles.but}>
-        <Text style={styles.buttonText}><Icon name="help" size={30} color="black" backgroundColor="transparent" padding={5} />HelpCenter</Text>
+
+      <TouchableOpacity onPress={() => navigation.navigate('HelpCenter')} style={styles.button}>
+        <View style={styles.buttonContent}>
+          <Icon name="help" size={30} color="#f39c12" />
+          <Text style={styles.buttonText}>Help Center</Text>
+        </View>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Login')} style={styles.button}>
-        <Text style={styles.buttonText}>Log Out</Text>
+
+      <TouchableOpacity onPress={() => navigation.navigate('Login')} style={[styles.button, styles.logoutButton]}>
+        <Text style={styles.logoutText}>Log Out</Text>
       </TouchableOpacity>
     </View>
   );
@@ -30,38 +44,53 @@ export default function Profile({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'black',
-    height : '100%',
-    padding: 10,
-    marginBottom: 10,
+    flex: 1,
+    backgroundColor: '#1e1e1e',
+    padding: 20,
+    justifyContent: 'center',
   },
-  
-  text: {
-    color: 'white',
-    fontSize: 24,
-    marginBottom: 20,
+
+  headerText: {
+    color: '#fff',
+    fontSize: 32,
+    fontWeight: 'bold',
+    marginBottom: 30,
+    textAlign: 'center',
   },
-  buttonText: {
-    color: 'black',
-    fontSize: 20,
-    marginBottom: 20,
-    padding: 5,
-  },
+
   button: {
-      backgroundColor: 'blue', 
-      borderRadius: 10,
-      paddingVertical: 10,
-      paddingHorizontal: 20,
-      alignItems: 'center',
-      marginVertical: 10,
-    
-  },
-  
-  but: {
-    backgroundColor: 'lightgrey',
-    alignContent: 'center',
-
+    backgroundColor: '#34495e',
+    borderRadius: 10,
+    paddingVertical: 15,
+    marginBottom: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 2 },
   },
 
- 
+  buttonContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  buttonText: {
+    color: '#fff',
+    fontSize: 20,
+    marginLeft: 10,
+  },
+
+  logoutButton: {
+    backgroundColor: '#e74c3c',
+  },
+
+  logoutText: {
+    color: '#fff',
+    fontSize: 22,
+    fontWeight: 'bold',
+  },
 });
